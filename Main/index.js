@@ -13,3 +13,8 @@ let team = []
 
 let teamID = []
 
+function init() {
+    
+}
+    
+
