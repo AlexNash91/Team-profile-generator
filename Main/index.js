@@ -10,6 +10,7 @@ const fs = require('fs')
 
 const pageTemplate = require('./src/page-template.js')
 const { default: inquirer } = require('inquirer')
+const Manager = require('./lib/Manager.js')
 
 let team = []
 
@@ -141,6 +142,10 @@ teamData()
 // function for creating a manager (call this at the bottom of your init function)
 // inquirer prompt with the manager questions
 // in your .then - set up a variable for manager that is equal to a new instance of your Manager class passing in the responses you recieved from the user's input
+.then((answers) => {
+    const manager = new Manager(answer.name)
+    teamMember.push(manager)
+})
 // push that variable to your team members array, push the id to the id array
 // call your next function
 
