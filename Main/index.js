@@ -50,6 +50,8 @@ function init() {
                 teamMembers.push(manager)               
                 // IDs.push(manager.id)          
             })
+        
+        teamAsk()
     }
 
     function teamAsk() {
