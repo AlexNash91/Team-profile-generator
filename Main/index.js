@@ -11,14 +11,108 @@ const fs = require('fs')
 const pageTemplate = require('./src/page-template.js')
 const { default: inquirer } = require('inquirer')
 const Manager = require('./lib/Manager.js')
+const Intern = require('./lib/Intern.js')
+const Engineer = require('./lib/Engineer.js')
 
-let team = []
+let teamMembers = []
 
-let teamID = []
+// Do I need this?
+// let IDs = []
 
 
 function init() {
-    function engineerData() {
+    function addManager() {
+        inquirer
+            .prompt([
+                {
+                    type: 'input',
+                    message: 'What is your name?',
+                    name: 'name',
+                },
+                {
+                    type: 'input',
+                    message: 'What is your id?',
+                    name: 'id',
+                },
+                {
+                    type: 'input',
+                    message: 'What is your email?',
+                    name: 'email',
+                },
+                {
+                    type: 'input',
+                    message: 'What is your office number?',
+                    name: 'officeNumber',
+                }
+            ])
+            .then((answers) => {
+                const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
+                teamMembers.push(manager)               
+                // IDs.push(manager.id)          
+            })
+    }
+
+    function teamAsk() {
+        inquirer 
+            .prompt([
+                {
+                    type: 'list',
+                    message: 'What type of employee would you like to create?', 
+                    name: 'team',
+                    choices: ['Intern', 'Engineer', 'Done']
+                }
+
+            ])
+            .then((answers) => {
+                switch(answers) {
+                    case 'Intern':
+                        addIntern()
+                        break; 
+                    case 'Engineer':
+                        addEngineer()
+                        break;
+                    case 'Done':
+                        buildTeam()
+                }   
+            })
+    }
+
+    
+
+    function addIntern() {
+        inquirer
+            .prompt([
+                {
+                    type: 'input',
+                    message: 'What is your name?',
+                    name: 'name',
+                },
+                {
+                    type: 'input',
+                    message: 'What is your id?',
+                    name: 'id',
+                },
+                {
+                    type: 'input',
+                    message: 'What is your email?',
+                    name: 'email',
+                },
+                {
+                    type: 'input',
+                    message: 'What school do you attend?',
+                    name: 'school',
+                }
+            ])
+            .then((answers) => {
+                const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
+                teamMembers.push(intern)
+                // IDs.push(intern.id)
+            })
+                
+
+    }
+
+    function addEngineer() {
         inquirer
             .prompt([
                 {
@@ -43,121 +137,26 @@ function init() {
                     name: 'github',
                 }
             ])
-            .then((response) =>
-                team.push('engineer'))
+            .then((answers) => {
+                const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
+                teamMembers.push(engineer)
+                // IDs.push(engineer.id)
+            })
+                
     }
 
-    function internData() {
-        inquirer
-            .prompt([
-                {
-                    type: 'input',
-                    message: 'What is your name?',
-                    name: 'name',
-                },
-                {
-                    type: 'input',
-                    message: 'What is your id?',
-                    name: 'id',
-
-                },
-                {
-                    type: 'input',
-                    message: 'What is your email?',
-                    name: 'email',
-                },
-                {
-                    type: 'input',
-                    message: 'What is your github?',
-                    name: 'github',
-                }
-            ])
-            .then((response) =>
-                team.push('engineer'))
-
+    function buildTeam() {
+        // Need to figure out syntax for the arguments for writeFileSync
+        // fs.writeFileSync(yourPathToDistFolder, functionFromPageTemplate(teamMembers), 'utf-8');
     }
 
-    function managerData() {
-        inquirer
-            .prompt([
-                {
-                    type: 'input',
-                    message: 'What is your name?',
-                    name: 'name',
-                },
-                {
-                    type: 'input',
-                    message: 'What is your id?',
-                    name: 'id',
-
-                },
-                {
-                    type: 'input',
-                    message: 'What is your email?',
-                    name: 'email',
-                },
-                {
-                    type: 'input',
-                    message: 'What is your github?',
-                    name: 'github',
-                }
-            ])
-            .then((response) =>
-                team.push('engineer'))
-    }
-
-    function teamData() {
-    }
-
+    addManager()
 }
 
 init()
 
-engineerData()
-
-internData()
-
-managerData()
-
-teamData()
 
 
 
 
 
-
-
-
-// require all of your classes
-// require inquirer, path if needed, fs
-
-// require your page template
-
-// empty team members array
-// empty id array
-
-
-// function that wraps everything (like an init function)
-
-// function for creating a manager (call this at the bottom of your init function)
-// inquirer prompt with the manager questions
-// in your .then - set up a variable for manager that is equal to a new instance of your Manager class passing in the responses you recieved from the user's input
-.then((answers) => {
-    const manager = new Manager(answer.name)
-    teamMember.push(manager)
-})
-// push that variable to your team members array, push the id to the id array
-// call your next function
-
-// next function should be for creating the team
-// this should ask the user what type of employee they would like to create
-// in your .then, have a conditional or switch case that runs that employee types function based on what they choose
-// or if they select the option that says they are done adding team members, run the function that builds the team
-
-
-function buildTeam() {
-    // fs.writeFileSync(yourPathToDistFolder, functionFromPageTemplate(teamMembers), 'utf-8');
-}
-
-
-  // make sure call your init function
