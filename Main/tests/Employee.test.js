@@ -34,16 +34,37 @@ TestScheduler("Can set email via constructor arguments", () => {
     expect(newEmp.email).toMatch(email)
 })
 
+// Don't think these are right yet
 
 // write a test to see if your getter method is working
 TestScheduler("can get name via getName()", () => {
     // variable for the test value
+    let getName = "jack"
     // variable for the new E,ployee with that test vlue passed in
+    let emp = new Employee(getName, answers,id, answers.email)
     // expect that when you call that method - to be the test value variable
+    expect(getName()).toReturn(getName)
 })
 
 // same for id
+TestScheduler("can get id via getId()", () => {
+    let getId = "123"
+    let Id = new Employee(answers.name, getId, answers.email)
+    expect(getId()).toReturn(getId)
+})
+
 
 // same for email
+TestScheduler("can get email via getId()", () => {
+    let getEmail = "Jack@Jack.com"
+    let Email = new Employee(answers.name, answers.id, getEmail)
+    expect(getEmail()).toReturn(getEmail)
+})
+
 
 // same for getting role
+TestScheduler("can get role via getRole()", () => {
+    let getRole = "Employee"
+    let Id = new Employee(answers.name, getId, answers.email)
+    expect(getRole()).toReturn(getRole)
+})
