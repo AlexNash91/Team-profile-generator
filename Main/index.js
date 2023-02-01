@@ -47,11 +47,12 @@ function init() {
             ])
             .then((answers) => {
                 const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
-                teamMembers.push(manager)               
+                teamMembers.push(manager)    
+                teamAsk()  
                 // IDs.push(manager.id)          
             })
         
-        teamAsk()
+        
     }
 
     function teamAsk() {
@@ -108,6 +109,7 @@ function init() {
             .then((answers) => {
                 const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
                 teamMembers.push(intern)
+                teamAsk()
                 // IDs.push(intern.id)
             })
                 
@@ -142,6 +144,7 @@ function init() {
             .then((answers) => {
                 const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
                 teamMembers.push(engineer)
+                teamAsk()
                 // IDs.push(engineer.id)
             })
                 
@@ -149,16 +152,10 @@ function init() {
 
     function buildTeam() {
         // Need to figure out syntax for the arguments for writeFileSync
-        // fs.writeFileSync(yourPathToDistFolder, functionFromPageTemplate(teamMembers), 'utf-8');
+        fs.writeFileSync("./dist/team.html", functionFromPageTemplate(teamMembers), 'utf-8');
     }
 
     addManager()
 }
 
 init()
-
-
-
-
-
-
