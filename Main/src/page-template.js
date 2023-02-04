@@ -1,6 +1,20 @@
 // create the team
 const generateTeam = team => {
     // write a loop to generate the team html
+    teamMembers.forEach(employee => {
+        switch(employee.getRole()) {
+            case 'Manager':
+                generateManager(employee);
+                break;
+            case 'Engineer':
+                generateEngineer(employee);
+                break;
+            case 'Intern':
+                generateIntern(employee);
+                break;
+        }
+    })
+
 
     // create manager html
     const generateManager = manager => {
@@ -42,7 +56,6 @@ const generateTeam = team => {
     // at the end, joing the array together
 
     // return the joined array
-
 }
 
 // export function to generate entire page

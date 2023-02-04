@@ -152,7 +152,7 @@ function init() {
 
     function buildTeam() {
         // Need to figure out syntax for the arguments for writeFileSync
-        fs.writeFileSync("./dist/team.html", functionFromPageTemplate(teamMembers), 'utf-8');
+        fs.writeFileSync("./dist/team.html", generateTeam(teamMembers), 'utf-8');
     }
 
     addManager()
