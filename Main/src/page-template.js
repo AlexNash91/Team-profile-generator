@@ -1,5 +1,6 @@
 // create the team
 const generateTeam = team => {
+    // write a loop to generate the team html
 
     // create manager html
     const generateManager = manager => {
